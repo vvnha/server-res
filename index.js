@@ -38,5 +38,5 @@ io.on('connection', (client) => {
 
 app.use(router);
 server.listen(process.env.PORT, () => {
-    console.log("App is lisport " + port)
+    res.send("App is lisport " + process.env.PORT)
 })
