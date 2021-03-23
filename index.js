@@ -23,6 +23,7 @@ router.get("/", (req, res, next) => {
 
 app.post('/add', (req, res) => {
     var newTable = req.body.num;
+    var status = req.body.status;
     var connectionOptions = {
         "force new connection": true,
         "reconnectionAttempts": "Infinity",
@@ -39,10 +40,14 @@ app.post('/add', (req, res) => {
     });
 
     if (table.indexOf(newTable) > -1) {
-        var y = table.indexOf(newTable);
-        table.splice(y, 1);
+        if (status == false) {
+            var y = table.indexOf(newTable);
+            table.splice(y, 1);
+        }
     } else {
-        table.push(newTable);
+        if (status == true) {
+            table.push(newTable);
+        }
     }
     socket.emit('message', table);
 })
