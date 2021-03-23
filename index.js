@@ -30,7 +30,7 @@ app.post('/add', (req, res) => {
         "timeout": 10000,
         "transports": ["websocket"]
     };
-    const socket = ioClient("http://localhost:9000/", connectionOptions);
+    const socket = ioClient("https://service-table.herokuapp.com/", connectionOptions);
     socket.on('connect', function (data) {
         socket.emit('join', 'hello server from client');
         socket.on('thread', (data) => {
