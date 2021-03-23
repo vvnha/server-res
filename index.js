@@ -50,7 +50,7 @@ app.post('/add', (req, res) => {
     //     }
     // }
     // socket.emit('message', table);
-    res.send(newTable);
+    res.send("OK");
 })
 
 io.on('connection', (client) => {
