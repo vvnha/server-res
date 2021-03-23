@@ -30,11 +30,10 @@ app.post('/add', (req, res) => {
         "timeout": 10000,
         "transports": ["websocket"]
     };
-    const socket = ioClient("https://service-table.herokuapp.com/", connectionOptions);
+    const socket = ioClient("http://localhost:9000/", connectionOptions);
     socket.on('connect', function (data) {
         socket.emit('join', 'hello server from client');
         socket.on('thread', (data) => {
-            // table = data;
             socket.disconnect();
         });
     });
@@ -73,6 +72,6 @@ io.on('connection', (client) => {
 
 
 app.use(router);
-server.listen(port, () => {
-    console.log("App is lisport " + port)
+server.listen(process.env.PORT, () => {
+    console.log("App is lisport " + process.env.PORT)
 })
