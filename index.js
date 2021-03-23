@@ -39,17 +39,18 @@ app.post('/add', (req, res) => {
     //     });
     // });
 
-    if (table.indexOf(newTable) > -1) {
-        if (status == false) {
-            var y = table.indexOf(newTable);
-            table.splice(y, 1);
-        }
-    } else {
-        if (status == true) {
-            table.push(newTable);
-        }
-    }
-    socket.emit('message', table);
+    // if (table.indexOf(newTable) > -1) {
+    //     if (status == false) {
+    //         var y = table.indexOf(newTable);
+    //         table.splice(y, 1);
+    //     }
+    // } else {
+    //     if (status == true) {
+    //         table.push(newTable);
+    //     }
+    // }
+    // socket.emit('message', table);
+    res.send(newTable);
 })
 
 io.on('connection', (client) => {
