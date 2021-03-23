@@ -24,20 +24,20 @@ router.get("/", (req, res, next) => {
 app.post('/add', (req, res) => {
     var newTable = req.body.num;
     var status = req.body.status;
-    var connectionOptions = {
-        "force new connection": true,
-        "reconnectionAttempts": "Infinity",
-        "timeout": 10000,
-        "transports": ["websocket"]
-    };
-    const socket = ioClient("https://service-table.herokuapp.com/", connectionOptions);
-    socket.on('connect', function (data) {
-        socket.emit('join', 'hello server from client');
-        socket.on('thread', (data) => {
-            // table = data;
-            socket.disconnect();
-        });
-    });
+    // var connectionOptions = {
+    //     "force new connection": true,
+    //     "reconnectionAttempts": "Infinity",
+    //     "timeout": 10000,
+    //     "transports": ["websocket"]
+    // };
+    // const socket = ioClient("https://service-table.herokuapp.com/", connectionOptions);
+    // socket.on('connect', function (data) {
+    //     socket.emit('join', 'hello server from client');
+    //     socket.on('thread', (data) => {
+    //         // table = data;
+    //         socket.disconnect();
+    //     });
+    // });
 
     if (table.indexOf(newTable) > -1) {
         if (status == false) {
