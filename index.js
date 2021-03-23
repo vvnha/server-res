@@ -13,7 +13,7 @@ var io = require('socket.io')(server);
 var ioClient = require('socket.io-client');
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
-var table = [7, 4, 5];
+var table = [];
 
 router.get("/", (req, res, next) => {
     res.send("hello 1");
