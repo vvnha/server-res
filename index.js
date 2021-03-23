@@ -33,12 +33,11 @@ app.post('/add', (req, res) => {
     socket.on('connect', function (data) {
         socket.emit('join', 'hello server from client');
         socket.on('thread', (data) => {
-            table = data;
-            console.log(data);
+            // table = data;
             socket.disconnect();
         });
     });
-    console.log(table.indexOf(table));
+
     if (table.indexOf(newTable) > -1) {
         var y = table.indexOf(newTable);
         table.splice(y, 1);
@@ -58,7 +57,8 @@ io.on('connection', (client) => {
     })
     client.on('message', function (data) {
         if (typeof data === "string") data = JSON.parse(data);
-        console.log(data);
+        table = data;
+        console.log(table);
         client.emit('thread', data);
         client.broadcast.emit('thread', data);
     })
