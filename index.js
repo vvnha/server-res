@@ -13,7 +13,7 @@ var io = require('socket.io')(server);
 var ioClient = require('socket.io-client');
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
-var table = [];
+var table = [7, 4, 5];
 
 router.get("/", (req, res, next) => {
     res.send("hello 1");
@@ -24,33 +24,34 @@ router.get("/", (req, res, next) => {
 app.post('/add', (req, res) => {
     var newTable = req.body.num;
     var status = req.body.status;
-    // var connectionOptions = {
-    //     "force new connection": true,
-    //     "reconnectionAttempts": "Infinity",
-    //     "timeout": 10000,
-    //     "transports": ["websocket"]
-    // };
-    // const socket = ioClient("https://service-table.herokuapp.com/", connectionOptions);
-    // socket.on('connect', function (data) {
-    //     socket.emit('join', 'hello server from client');
-    //     socket.on('thread', (data) => {
-    //         // table = data;
-    //         socket.disconnect();
-    //     });
-    // });
+    var connectionOptions = {
+        "force new connection": true,
+        "reconnectionAttempts": "Infinity",
+        "timeout": 10000,
+        "transports": ["websocket"]
+    };
+    const socket = ioClient("https://service-table.herokuapp.com/", connectionOptions);
+    socket.on('connect', function (data) {
+        socket.emit('join', 'hello server from client');
+        socket.on('thread', (data) => {
+            // table = data;
+            socket.disconnect();
+        });
+    });
 
-    // if (table.indexOf(newTable) > -1) {
-    //     if (status == false) {
-    //         var y = table.indexOf(newTable);
-    //         table.splice(y, 1);
-    //     }
-    // } else {
-    //     if (status == true) {
-    //         table.push(newTable);
-    //     }
-    // }
-    // socket.emit('message', table);
-    res.send(newTable);
+    if (table.indexOf(newTable) > -1) {
+        if (status == false) {
+            var y = table.indexOf(newTable);
+            table.splice(y, 1);
+        }
+    } else {
+        if (status == true) {
+            table.push(newTable);
+        }
+    }
+    socket.emit('message', table);
+    res.send("hello 1");
+    console.log(table);
 })
 
 io.on('connection', (client) => {
@@ -72,6 +73,6 @@ io.on('connection', (client) => {
 
 
 app.use(router);
-server.listen(process.env.PORT, () => {
-    console.log("App is lisport " + process.env.PORT)
+server.listen(port, () => {
+    console.log("App is lisport " + port)
 })
