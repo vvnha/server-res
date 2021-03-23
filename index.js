@@ -50,7 +50,7 @@ app.post('/add', (req, res) => {
         }
     }
     socket.emit('message', table);
-    res.send("hello 1");
+    res.send(req.body.num + "");
     console.log(table);
 })
 
