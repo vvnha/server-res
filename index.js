@@ -16,7 +16,7 @@ app.use(bp.urlencoded({ extended: true }))
 var table = [];
 
 router.get("/", (req, res, next) => {
-    res.send("hello 1");
+    res.send("hello");
 });
 
 
@@ -39,12 +39,12 @@ app.post('/add', (req, res) => {
     });
 
     if (table.indexOf(newTable) > -1) {
-        if (status == false) {
+        if (status == false || status == "flase") {
             var y = table.indexOf(newTable);
             table.splice(y, 1);
         }
     } else {
-        if (status == true) {
+        if (status == true || status == "true") {
             table.push(newTable);
         }
     }
