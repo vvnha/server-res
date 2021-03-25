@@ -39,7 +39,7 @@ app.post('/add', (req, res) => {
     });
 
     if (table.indexOf(newTable) > -1) {
-        if (status == false || status == "flase") {
+        if (status == false || status == "false") {
             var y = table.indexOf(newTable);
             table.splice(y, 1);
         }
